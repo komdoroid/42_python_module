@@ -37,14 +37,14 @@ class Plant:
 
 
 class Flower(Plant):
-    def super().__init__(self, name, height, age):
+    def super().__init__(self, name, height, age, color):
         self.coloer = coler
 
     def bloom():
 
 
 class Tree(Plant):
-    def super().__init__(self, name, height, age):
+    def super().__init__(self, name, height, age, trunk_diameter):
         self.trunk_diameter = trunk_diameter
 
     def produce_shade():
