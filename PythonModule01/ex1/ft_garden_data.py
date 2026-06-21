@@ -17,4 +17,3 @@ if __name__ == '__main__':
     rose.show()
     sunflower.show()
     cactus.show()
-    print('=== End of Program ===')
