@@ -1,4 +1,4 @@
-class   Plant:
+class Plant:
     def __init__(self, name, height, age, growth_rate):
         self.name = name
         self.height = height
@@ -13,6 +13,7 @@ class   Plant:
 
     def age(self):
         self.plant_age = self.plant_age + 1
+
 
 rose = Plant('Rose', 25, 30, 0.8)
 sunflower = Plant('Sunflower', 80, 45, 1)
