@@ -28,11 +28,11 @@ class Plant:
                 )
         self._status._show_count += 1
 
-    def grow(self):
+    def grow(self) -> None:
         self._height = self._height + self.growth_rate
         self._status._grow_count += 1
 
-    def age(self):
+    def age(self) -> None:
         self._plant_age = self._plant_age + 20
         self._status._age_count += 1
 

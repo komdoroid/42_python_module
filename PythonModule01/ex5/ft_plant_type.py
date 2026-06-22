@@ -2,12 +2,13 @@ class Plant:
     DEFAULT_HEIGHT = 0
     DEFAULT_AGE = 0
 
-    def __init__(self, name, height, age):
+    def __init__(self, name, height, age, growth_rate):
         self._name = name
         self._height = self.DEFAULT_HEIGHT
         self.set_height(height)
         self._plant_age = self.DEFAULT_AGE
         self.set_age(age)
+        self.growth_rate = growth_rate
 
     def show(self) -> None:
         print(
@@ -15,10 +16,10 @@ class Plant:
                 f'{self.get_age()} days old'
                 )
 
-    def grow(self):
+    def grow(self) -> None:
         self._height = self._height + self.growth_rate
 
-    def age(self):
+    def age(self) -> None:
         self._plant_age = self._plant_age + 1
 
     def set_height(self, value: float) -> None:
@@ -43,8 +44,8 @@ class Plant:
 
 
 class Flower(Plant):
-    def __init__(self, name, height, age, color):
-        super().__init__(name, height, age)
+    def __init__(self, name, height, age, growth_rate, color):
+        super().__init__(name, height, age, growth_rate)
         self.color = color
         self.in_bloom = False
 
@@ -62,8 +63,8 @@ class Flower(Plant):
 
 
 class Tree(Plant):
-    def __init__(self, name, height, age, trunk_diameter):
-        super().__init__(name, height, age)
+    def __init__(self, name, height, age, growth_rate, trunk_diameter):
+        super().__init__(name, height, age, growth_rate)
         self.trunk_diameter = trunk_diameter
 
     def show(self) -> None:
@@ -77,10 +78,9 @@ class Tree(Plant):
 
 
 class Vegetable(Plant):
-    growth_rate = 2.1
-
-    def __init__(self, name, height, age, harvest_season, nutritional_value):
-        super().__init__(name, height, age)
+    def __init__(self, name, height, age, growth_rate,
+                 harvest_season, nutritional_value):
+        super().__init__(name, height, age, growth_rate)
         self.harvest_season = harvest_season
         self.nutritional_value = nutritional_value
 
@@ -97,20 +97,20 @@ class Vegetable(Plant):
 if __name__ == '__main__':
     print('=== Garden Plant Types ===')
     print('=== Flower')
-    rose = Flower('Rose', 15, 10, 'red')
+    rose = Flower('Rose', 15, 10, 0, 'red')
     rose.show()
     rose.bloom()
     rose.show()
     print('')
 
     print('=== Tree')
-    oak = Tree('Oak', 200, 365, 5)
+    oak = Tree('Oak', 200, 365, 0, 5)
     oak.show()
     oak.produce_shade()
     print('')
 
     print('=== Vegetable')
-    tomato = Vegetable('Tomato', 5, 10, 'April', 0)
+    tomato = Vegetable('Tomato', 5, 10, 2.1, 'April', 0)
     tomato.show()
     print('[make tomato grow and age for 20 days]')
     for _ in range(20):
