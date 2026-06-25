@@ -1,9 +1,9 @@
 class Plant:
-    DEFAULT_HEIGHT = 0
-    DEFAULT_AGE = 0
+    DEFAULT_HEIGHT: float = 0
+    DEFAULT_AGE: int = 0
 
     class _Status:
-        def __init__(self):
+        def __init__(self) -> None:
             self._grow_count = 0
             self._age_count = 0
             self._show_count = 0
@@ -12,7 +12,8 @@ class Plant:
             print(f'Status: {self._grow_count} grow, '
                   f'{self._age_count} age, {self._show_count} show')
 
-    def __init__(self, name, height, age, growth_rate):
+    def __init__(self, name: str, height: float,
+                 age: int, growth_rate: float) -> None:
         self._name = name
         self._height = self.DEFAULT_HEIGHT
         self.set_height(height)
@@ -23,7 +24,7 @@ class Plant:
 
     def show(self) -> None:
         print(
-                f'{self._name}: {round(self.get_height(), 2):.1f}cm, '
+                f'{self._name}: {self.get_height():.1f}cm, '
                 f'{self.get_age()} days old'
                 )
         self._status._show_count += 1
@@ -43,7 +44,7 @@ class Plant:
         else:
             self._height = value
 
-    def set_age(self, value: float) -> None:
+    def set_age(self, value: int) -> None:
         if 0 > value:
             print(f'{self._name}: Error, age can\'t be negative')
             print('Age update rejected')
@@ -94,7 +95,8 @@ class Flower(Plant):
 class Seed(Flower):
     DEFAULT_SEEDS = 0
 
-    def __init__(self, name, height, age, growth_rate, color, seed_num):
+    def __init__(self, name, height, age,
+                 growth_rate, color, seed_num) -> None:
         super().__init__(name, height, age, growth_rate, color)
         self.seeds = seed_num
 
@@ -108,26 +110,27 @@ class Seed(Flower):
 
 class Tree(Plant):
     class _Status(Plant._Status):
-        def __init__(self):
+        def __init__(self) -> None:
             super().__init__()
-            self._produce_shade_count = 0
+            self._produce_shade_count: int = 0
 
         def show_status(self) -> None:
             super().show_status()
             print(f' {self._produce_shade_count} shade')
 
-    def __init__(self, name, height, age, growth_rate, trunk_diameter):
+    def __init__(self, name, height, age, growth_rate, trunk_diameter) -> None:
         super().__init__(name, height, age, growth_rate)
+        self._status: Tree._Status = Tree._Status()
         self.trunk_diameter = trunk_diameter
 
     def show(self) -> None:
         super().show()
-        print(f' Trunk diameter: {round(self.trunk_diameter):.1f}cm')
+        print(f' Trunk diameter: {self.trunk_diameter:.1f}cm')
 
     def produce_shade(self) -> None:
         print('[asking the oak to produce shade]')
-        print(f'Tree Oak now produces a shade of {self._height}cm long and '
-              f'{round(self.trunk_diameter, 1)}cm wide')
+        print(f'Tree Oak now produces a shade of {self._height:.1f}cm long and '
+              f'{self.trunk_diameter:.1f}cm wide')
         self._status._produce_shade_count += 1
 
 
@@ -140,7 +143,7 @@ class Vegetable(Plant):
             growth_rate,
             harvest_season,
             nutritional_value
-            ):
+            ) -> None:
         super().__init__(name, height, age, growth_rate)
         self.harvest_season = harvest_season
         self.nutritional_value = nutritional_value

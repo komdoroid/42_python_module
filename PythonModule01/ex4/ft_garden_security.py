@@ -2,7 +2,7 @@ class Plant:
     DEFAULT_HEIGHT = 0
     DEFAULT_AGE = 0
 
-    def __init__(self, name, height, age):
+    def __init__(self, name: str, height: int, age: int) -> None:
         self._name = name
         self._height = self.DEFAULT_HEIGHT
         self.set_height(height)
@@ -11,28 +11,28 @@ class Plant:
 
     def show(self) -> None:
         print(
-                f'{self._name}: {round(self.get_height()):.1f}cm, '
+                f'{self._name}: {self.get_height():.1f}cm, '
                 f'{self.get_age()} days old'
                 )
 
-    def set_height(self, value: float) -> None:
+    def set_height(self, value: int) -> None:
         if 0 > value:
             print(f'{self._name}: Error, height can\'t be negative')
             print('Height update rejected')
         else:
             self._height = value
 
-    def set_age(self, value: float) -> None:
+    def set_age(self, value: int) -> None:
         if 0 > value:
             print(f'{self._name}: Error, age can\'t be negative')
             print('Age update rejected')
         else:
             self._age = value
 
-    def get_height(self) -> float:
+    def get_height(self) -> int:
         return self._height
 
-    def get_age(self) -> float:
+    def get_age(self) -> int:
         return self._age
 
 

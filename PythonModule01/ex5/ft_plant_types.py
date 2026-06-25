@@ -1,8 +1,9 @@
 class Plant:
-    DEFAULT_HEIGHT = 0
-    DEFAULT_AGE = 0
+    DEFAULT_HEIGHT: float = 0
+    DEFAULT_AGE: float = 0
 
-    def __init__(self, name, height, age, growth_rate):
+    def __init__(self, name: str, height: float,
+                 age: int, growth_rate: float) -> None:
         self._name = name
         self._height = self.DEFAULT_HEIGHT
         self.set_height(height)
@@ -12,7 +13,7 @@ class Plant:
 
     def show(self) -> None:
         print(
-                f'{self._name}: {round(self.get_height(), 1)}cm, '
+                f'{self._name}: {self.get_height():.1f}cm, '
                 f'{self.get_age()} days old'
                 )
 
@@ -69,12 +70,12 @@ class Tree(Plant):
 
     def show(self) -> None:
         super().show()
-        print(f' Trunk diameter: {self.trunk_diameter}cm')
+        print(f' Trunk diameter: {self.trunk_diameter:.1f}cm')
 
     def produce_shade(self) -> None:
         print('[asking the oak to produce shade]')
-        print(f'Tree Oak now produces a shade of {self._height}cm long and '
-              f'{round(self.trunk_diameter, 1)}cm wide')
+        print(f'Tree Oak now produces a shade of {self._height:.1f}cm long and '
+              f'{self.trunk_diameter:.1f}cm wide')
 
 
 class Vegetable(Plant):
@@ -87,7 +88,7 @@ class Vegetable(Plant):
     def show(self) -> None:
         super().show()
         print(f' Harvest season: {self.harvest_season}')
-        print(f' Nutritional value {self.nutritional_value}')
+        print(f' Nutritional value: {self.nutritional_value}')
 
     def grow(self) -> None:
         super().grow()
