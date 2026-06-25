@@ -1,6 +1,6 @@
 class Plant:
     DEFAULT_HEIGHT: float = 0
-    DEFAULT_AGE: float = 0
+    DEFAULT_AGE: int = 0
 
     def __init__(self, name: str, height: float,
                  age: int, growth_rate: float) -> None:
@@ -30,7 +30,7 @@ class Plant:
         else:
             self._height = value
 
-    def set_age(self, value: float) -> None:
+    def set_age(self, value: int) -> None:
         if 0 > value:
             print(f'{self._name}: Error, age can\'t be negative')
             print('Age update rejected')
@@ -45,7 +45,8 @@ class Plant:
 
 
 class Flower(Plant):
-    def __init__(self, name, height, age, growth_rate, color):
+    def __init__(self, name: str, height: float, age: int,
+                 growth_rate: float, color: str) -> None:
         super().__init__(name, height, age, growth_rate)
         self.color = color
         self.in_bloom = False
@@ -64,7 +65,8 @@ class Flower(Plant):
 
 
 class Tree(Plant):
-    def __init__(self, name, height, age, growth_rate, trunk_diameter):
+    def __init__(self, name: str, height: float, age: int,
+                 growth_rate: float, trunk_diameter: float) -> None:
         super().__init__(name, height, age, growth_rate)
         self.trunk_diameter = trunk_diameter
 
@@ -74,13 +76,13 @@ class Tree(Plant):
 
     def produce_shade(self) -> None:
         print('[asking the oak to produce shade]')
-        print(f'Tree Oak now produces a shade of {self._height:.1f}cm long and '
-              f'{self.trunk_diameter:.1f}cm wide')
+        print(f'Tree Oak now produces a shade of {self._height:.1f}cm long '
+              f'and {self.trunk_diameter:.1f}cm wide')
 
 
 class Vegetable(Plant):
-    def __init__(self, name, height, age, growth_rate,
-                 harvest_season, nutritional_value):
+    def __init__(self, name: str, height: float, age: int, growth_rate: float,
+                 harvest_season: str, nutritional_value: int) -> None:
         super().__init__(name, height, age, growth_rate)
         self.harvest_season = harvest_season
         self.nutritional_value = nutritional_value
@@ -102,6 +104,7 @@ if __name__ == '__main__':
     rose.show()
     rose.bloom()
     rose.show()
+    Flower.show(rose)
     print('')
 
     print('=== Tree')
