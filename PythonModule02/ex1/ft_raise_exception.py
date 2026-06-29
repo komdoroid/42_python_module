@@ -9,30 +9,17 @@ def input_temperature(temp_str: str) -> int:
     return int(temp_str)
 
 
-def test_temperature(temp: str) -> int:
-    try:
-        return input_temperature(temp)
-    except Exception as e:
-        # print(type(e))
-        # print(type(e).__name__)
-        # print(e.args)
-        print(f'Caught input_temperature error: {e}\n')
-        return 0
+def test_temperature() -> None:
+    test_cases = ['25', 'abc', '100', '-50']
+    for temp in test_cases:
+        print(f"Input data is '{temp}'")
+        try:
+            print(f'Temperature is now {input_temperature(temp)}°C\n')
+        except Exception as e:
+            print(f'Caught input_temperature error: {e}\n')
+    print('All tests completed - program didn\'t crash')
 
 
 if __name__ == '__main__':
     print('=== Garden Temperature Checker ===\n')
-
-    print("Input data is '25'")
-    print(f'Temperature is now {test_temperature("25")}°C\n')
-
-    print("Input data is 'abc'")
-    test_temperature('abc')
-
-    print("Input data is '100'")
-    test_temperature('100')
-
-    print("Input data is '-50'")
-    test_temperature('-50')
-
-    print('All tests completed - program didn\'t crash')
+    test_temperature()
