@@ -11,6 +11,13 @@ def calculate_score(args: list[str]) -> None:
         except:
             print("Invalid parameter: '{score}'")
     scores_num = len(scores)
+    print('Scores processed: [', end='')
+    for i in range(scores_num):
+        if i == 0:
+            print(f'{scores[i]}', end='')
+            continue
+        print(f', {scores[i]}', end='')
+    print(']')
     if scores_num == 0:
         print('No scores provided. '
               'Usage: python3 ft_score_analytics.py '
