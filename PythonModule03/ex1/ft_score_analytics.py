@@ -2,14 +2,15 @@
 
 import sys
 
+
 def calculate_score(args: list[str]) -> None:
     scores = []
 
     for score in args:
         try:
             scores.append(int(score))
-        except:
-            print("Invalid parameter: '{score}'")
+        except ValueError:
+            print(f"Invalid parameter: '{score}'")
     scores_num = len(scores)
     print('Scores processed: [', end='')
     for i in range(scores_num):
