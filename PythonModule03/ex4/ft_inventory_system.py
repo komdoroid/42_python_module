@@ -43,12 +43,15 @@ if __name__ == '__main__':
         print(f'Item {key} reresents '
               f'{round(inventory[key] / sum(value_list) * 100, 1)}%')
 
-    min_item = min(inventory, key=get_quantity)
-    max_item = max(inventory, key=get_quantity)
-    print(f'Item most abundant: '
-          f'{max_item} with quantity {inventory[max_item]}')
-    print(f'Item least abundant: '
-          f'{min_item} with quantity {inventory[min_item]}')
+    if not inventory:
+        print('Inventory is empty')
+    else:
+        min_item = min(inventory, key=get_quantity)
+        max_item = max(inventory, key=get_quantity)
+        print(f'Item most abundant: '
+              f'{max_item} with quantity {inventory[max_item]}')
+        print(f'Item least abundant: '
+              f'{min_item} with quantity {inventory[min_item]}')
 
-    inventory.update({'magic_item': 1})
-    print(f'Updated inventory: {inventory}')
+        inventory.update({'magic_item': 1})
+        print(f'Updated inventory: {inventory}')

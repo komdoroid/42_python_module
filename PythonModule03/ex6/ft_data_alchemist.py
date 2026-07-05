@@ -24,7 +24,7 @@ if __name__ == '__main__':
             }
     print(f'Score dict: {score_dict}')
     score_ave = sum(score_dict.values()) / len(score_dict)
-    print(f'Score average is {score_ave}')
+    print(f'Score average is {round(score_ave, 2)}')
     high_score = {key: value
                   for key, value in score_dict.items()
                   if value > score_ave}
