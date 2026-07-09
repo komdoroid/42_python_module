@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
 
 import sys
-from typing import IO
 
 
 def output_ancient_text(target_file: str) -> str:
     f = open(target_file, 'r')
-    content: str = f.read()
+    try:
+        content: str = f.read()
+    finally:
+        f.close()
     return content
 
 
@@ -18,7 +20,6 @@ def add_ancient_text(content: str) -> str:
 
 def transform_data_procedure(target_file: str) -> str:
     print('=== Cyber Archives Recovery ===')
-    print('---\n')
     print(f"Accessing file '{target_file}'")
     print('---')
     content = output_ancient_text(target_file)
@@ -33,7 +34,7 @@ def transform_data_procedure(target_file: str) -> str:
     return new_content
 
 
-if __name__ == '__main__':
+def main() -> None:
     if len(sys.argv) != 2:
         print(f'Usage {sys.argv[0]} <file>')
     else:
@@ -41,16 +42,34 @@ if __name__ == '__main__':
         try:
             new_content = transform_data_procedure(target_file)
             new_file_name = input('Enter new file name (or empty): ')
-            if not new_file_name:
-                print('Not saving data.')
-            else:
-                print(f"Saving data to '{new_file_name}'")
-                print(f"Data saved in file '{new_file_name}'")
-                f = open(new_file_name, 'w')
-                f.write(new_content)
         except FileNotFoundError as e:
             print(f"Error opening file '{target_file}': {e}")
+            return
         except PermissionError as e:
             print(f"Error opening file '{target_file}': {e}")
-        finally:
-            f.close()
+            return
+        except OSError as e:
+            print(f"Error opening file '{target_file}': {e}")
+            return
+
+        if not new_file_name:
+            print('Not saving data.')
+        else:
+            print(f"Saving data to '{new_file_name}'")
+            print(f"Data saved in file '{new_file_name}'")
+            try:
+                f = open(new_file_name, 'w')
+                try:
+                    f.write(new_content)
+                finally:
+                    f.close()
+            except PermissionError as e:
+                print(f"Error opening file '{new_file_name}': {e}")
+                return
+            except OSError as e:
+                print(f"Error unexpected error: {e}")
+                return
+
+
+if __name__ == '__main__':
+    main()

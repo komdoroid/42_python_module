@@ -26,5 +26,7 @@ if __name__ == '__main__':
             print(f"Error opening file '{target_file}': {e}")
         except PermissionError as e:
             print(f"Error opening file '{target_file}': {e}")
+        except OSError as e:
+            print(f"Error opening file '{target_file}': {e}")
         finally:
             f.close()
