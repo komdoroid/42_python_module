@@ -31,18 +31,22 @@ if __name__ == '__main__':
                   'ancient_fragment.txt',
                   'new']
 
-    print(f"Using '{secure_archive.__name__}' to read from a nonexistent file:")
+    print(f"Using '{secure_archive.__name__}' "
+          f"to read from a nonexistent file:")
     bl, message = secure_archive(file_names[0], 0)
     print(f'({bl}, "{message}")\n')
 
-    print(f"Using '{secure_archive.__name__}' to read from a inaccessible file:")
+    print(f"Using '{secure_archive.__name__}' "
+          f"to read from a inaccessible file:")
     bl, message = secure_archive(file_names[1], 0)
     print(f'({bl}, "{message}")\n')
 
     print(f"Using '{secure_archive.__name__}' to read from a regular file:")
     bl, message = secure_archive(file_names[2], 0)
-    print(f'({bl}, "{message.replace('\n', '\\n')}")\n')
+    replaced_message = message.replace('\n', '\\n')
+    print(f"({bl}, '{replaced_message}')\n")
 
-    print(f"Using '{secure_archive.__name__}' to write previous content to a new file:")
+    print(f"Using '{secure_archive.__name__}' "
+          f"to write previous content to a new file:")
     bl, message = secure_archive(file_names[3], 1)
-    print(f'({bl}, "{message}")\n')
+    print(f"({bl}, '{message}')\n")
