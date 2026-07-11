@@ -21,9 +21,9 @@ def add_ancient_text(content: str) -> str:
 def transform_data_procedure(target_file: str) -> str:
     print('=== Cyber Archives Recovery ===')
     print(f"Accessing file '{target_file}'")
-    print('---')
     content = output_ancient_text(target_file)
     print(content)
+    print('---')
     print(f"File '{target_file}' closed.\n")
 
     print('Transform data:')
@@ -45,31 +45,43 @@ def main() -> None:
             sys.stdout.flush()
             new_file_name = sys.stdin.readline().rstrip('\n')
         except FileNotFoundError as e:
-            sys.stderr.write(f"[STDERR]Error opening file '{target_file}': {e}\n")
+            sys.stderr.write(
+                    f"[STDERR]Error opening file '{target_file}': {e}\n"
+                    )
             return
         except PermissionError as e:
-            sys.stderr.write(f"[STDERR]Error opening file '{target_file}': {e}\n")
+            sys.stderr.write(
+                    f"[STDERR]Error opening file '{target_file}': {e}\n"
+                    )
             return
         except OSError as e:
-            sys.stderr.write(f"[STDERR]Error opening file '{target_file}': {e}\n")
+            sys.stderr.write(
+                    f"[STDERR]Error opening file '{target_file}': {e}\n"
+                    )
             return
 
         if not new_file_name:
             print('Not saving data.')
         else:
             print(f"Saving data to '{new_file_name}'")
-            print(f"Data saved in file '{new_file_name}'")
             try:
                 f = open(new_file_name, 'w')
                 try:
                     f.write(new_content)
+                    print(f"Data saved in file '{new_file_name}'")
                 finally:
                     f.close()
             except PermissionError as e:
-                sys.stderr.write(f"[STDERR]Error opening file '{new_file_name}': {e}\n")
+                sys.stderr.write(
+                        f"[STDERR]Error opening file '{new_file_name}': {e}\n"
+                        f"Data not saved."
+                        )
                 return
             except OSError as e:
-                sys.stderr.write(f"[STDERR]Error unexpected error: {e}\n")
+                sys.stderr.write(
+                        f"[STDERR]Error unexpected error: {e}\n"
+                        f"Data not saved."
+                        )
                 return
 
 

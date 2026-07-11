@@ -56,11 +56,11 @@ def main() -> None:
             print('Not saving data.')
         else:
             print(f"Saving data to '{new_file_name}'")
-            print(f"Data saved in file '{new_file_name}'")
             try:
                 f = open(new_file_name, 'w')
                 try:
                     f.write(new_content)
+                    print(f"Data saved in file '{new_file_name}'")
                 finally:
                     f.close()
             except PermissionError as e:
