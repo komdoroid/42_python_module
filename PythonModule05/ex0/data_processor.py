@@ -1,4 +1,4 @@
-#!/usr/bin/env/ python3
+#! /usr/bin/env/ python3
 
 import typing
 from abc import ABC, abstractmethod
@@ -89,23 +89,18 @@ class LogProcessor(DataProcessor):
             self.data_list.append(str(data.values()))
 
 
-if __name__ == '__main__':
-    numProcessor = NumericProcessor()
-    textProcessor = TextProcessor()
-    logProcessor = LogProcessor()
-    num_data = 42
-    str_data = 'Hello'
-    foo_data = 'foo'
-    num_data_list = [1, 2, 3, 4, 5]
-    str_data_list = ['Hello', 'Nexus', 'World']
-    dict_data_list = [{'log_level': 'NOTICE',
-                  'log_message': 'Connection to server'},
-                 {'log_level': 'ERROR',
-                  'log_message': 'Unauthorized access!!'}]
+num_data = 42
+str_data = 'Hello'
+foo_data = 'foo'
+num_data_list = [1, 2, 3, 4, 5]
+str_data_list = ['Hello', 'Nexus', 'World']
+dict_data_list = [{'log_level': 'NOTICE',
+              'log_message': 'Connection to server'},
+             {'log_level': 'ERROR',
+              'log_message': 'Unauthorized access!!'}]
 
-    print('=== Code Nexus - Data Processor ===\n')
 
-    print('Testing Numeric Processor...')
+def output_num_processor(numProcessor: NumericProcessor) -> None:
     print(f" Trying to validate input '{num_data}'"
           f": {numProcessor.validate(num_data)}")
     print(f" Trying to validate input '{str_data}'"
@@ -122,7 +117,8 @@ if __name__ == '__main__':
         print(f" Numeric value {rank_counter}: {pop_data}")
     print()
 
-    print('Testing Text Processor...')
+
+def output_text_processor(textProcessor: TextProcessor) -> None:
     print(f" Trying to validate input '{num_data}'"
           f": {textProcessor.validate(num_data)}")
     print(f" Processing data: {str_data_list}")
@@ -135,7 +131,8 @@ if __name__ == '__main__':
         print(f" Text value {rank_counter}: {pop_data}")
     print()
 
-    print('Testing Log Processor...')
+
+def output_log_processor(logProcessor: LogProcessor) -> None:
     print(f" Trying to validate input '{str_data}'"
           f": {logProcessor.validate(str_data)}")
     print(f" Processing data: {dict_data_list}")
@@ -146,3 +143,21 @@ if __name__ == '__main__':
     for i in range(loop_count):
         rank_counter, pop_data = logProcessor.output()
         print(f" Log {rank_counter}: {pop_data}")
+
+
+if __name__ == '__main__':
+    numProcessor = NumericProcessor()
+    textProcessor = TextProcessor()
+    logProcessor = LogProcessor()
+
+
+    print('=== Code Nexus - Data Processor ===\n')
+
+    print('Testing Numeric Processor...')
+    output_num_processor(numProcessor)
+
+    print('Testing Text Processor...')
+    output_text_processor(textProcessor)
+
+    print('Testing Log Processor...')
+    output_log_processor(logProcessor)
