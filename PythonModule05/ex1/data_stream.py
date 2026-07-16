@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-import typing
+from typing import Any
 from abc import ABC, abstractmethod
 
 
@@ -10,7 +10,7 @@ class DataProcessor(ABC):
         self.rank_counter = 0
 
     @abstractmethod
-    def validate(self, data: any) -> bool:
+    def validate(self, data: Any) -> bool:
         pass
 
     @abstractmethod
@@ -44,7 +44,7 @@ class NumericProcessor(DataProcessor):
 
 
 class TextProcessor(DataProcessor):
-    def validate(self, data: any) -> bool:
+    def validate(self, data: Any) -> bool:
         if isinstance(data, str):
             return True
         if isinstance(data, list):
@@ -64,7 +64,7 @@ class TextProcessor(DataProcessor):
 
 
 class LogProcessor(DataProcessor):
-    def validate(self, data: any) -> bool:
+    def validate(self, data: Any) -> bool:
         if isinstance(data, dict):
             return True
         if isinstance(data, list):
