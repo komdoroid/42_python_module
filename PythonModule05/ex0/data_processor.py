@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 
-import typing
 from abc import ABC, abstractmethod
 
 
@@ -13,11 +12,9 @@ class DataProcessor(ABC):
     def validate(self, data: any) -> bool:
         pass
 
-
     @abstractmethod
     def inget(self, ) -> None:
         pass
-
 
     def output(self) -> tuple[int, str]:
         now_rank = self.rank_counter
@@ -32,7 +29,6 @@ class NumericProcessor(DataProcessor):
         if isinstance(data, list):
             return all(isinstance(item, (int, float)) for item in data)
         return False
-
 
     def inget(self, data: int | float | list[int | float]) -> None:
         if not self.validate(data):
@@ -54,7 +50,6 @@ class TextProcessor(DataProcessor):
             return all(isinstance(item, str) for item in data)
         return False
 
-
     def inget(self, data: str | list[str]) -> None:
         if not self.validate(data):
             print(f"'{data}' without prior validation:")
@@ -75,7 +70,6 @@ class LogProcessor(DataProcessor):
             return all(isinstance(item, dict) for item in data)
         return False
 
-
     def inget(self, data: dict | list[dict]) -> None:
         if not self.validate(data):
             print(f"'{data}' without prior validation:")
@@ -95,9 +89,9 @@ foo_data = 'foo'
 num_data_list = [1, 2, 3, 4, 5]
 str_data_list = ['Hello', 'Nexus', 'World']
 dict_data_list = [{'log_level': 'NOTICE',
-              'log_message': 'Connection to server'},
-             {'log_level': 'ERROR',
-              'log_message': 'Unauthorized access!!'}]
+                   'log_message': 'Connection to server'},
+                  {'log_level': 'ERROR',
+                   'log_message': 'Unauthorized access!!'}]
 
 
 def output_num_processor(numProcessor: NumericProcessor) -> None:
@@ -149,7 +143,6 @@ if __name__ == '__main__':
     numProcessor = NumericProcessor()
     textProcessor = TextProcessor()
     logProcessor = LogProcessor()
-
 
     print('=== Code Nexus - Data Processor ===\n')
 
