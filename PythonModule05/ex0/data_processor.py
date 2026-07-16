@@ -1,4 +1,4 @@
-#! /usr/bin/env/ python3
+#!/usr/bin/env python3
 
 import typing
 from abc import ABC, abstractmethod
