@@ -88,6 +88,7 @@ class LogProcessor(DataProcessor):
 
 class ExportPlugin(typing.Protocol):
     plugin_type: str
+
     def process_output(self, data: list[tuple[int, str]]) -> None:
         ...
 
