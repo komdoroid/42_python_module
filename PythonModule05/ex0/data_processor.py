@@ -89,10 +89,9 @@ str_data: str = 'Hello'
 foo_data: str = 'foo'
 num_data_list: list[int | float] = [1, 2, 3, 4, 5]
 str_data_list: list[str] = ['Hello', 'Nexus', 'World']
-dict_data_list: list[dict] = [{'log_level': 'NOTICE',
-                   'log_message': 'Connection to server'},
-                  {'log_level': 'ERROR',
-                   'log_message': 'Unauthorized access!!'}]
+dict_data_list: list[dict] = [
+        {'log_level': 'NOTICE', 'log_message': 'Connection to server'},
+        {'log_level': 'ERROR', 'log_message': 'Unauthorized access!!'}]
 
 
 def output_num_processor(numProcessor: NumericProcessor) -> None:

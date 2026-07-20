@@ -19,9 +19,10 @@ class DataProcessor(ABC):
         pass
 
     def output(self) -> tuple[int, str]:
+        data = self.data_list.pop(0)
         now_rank = self.rank_counter
         self.rank_counter += 1
-        return now_rank, self.data_list.pop(0)
+        return now_rank, data
 
 
 class NumericProcessor(DataProcessor):
@@ -86,6 +87,7 @@ class LogProcessor(DataProcessor):
 
 
 class ExportPlugin(typing.Protocol):
+    plugin_type: str
     def process_output(self, data: list[tuple[int, str]]) -> None:
         ...
 
@@ -114,7 +116,7 @@ class JSONExportPlugin:
 
 class DataStream():
     def __init__(self) -> None:
-        self.processors_list: list[DataProcessor]= []
+        self.processors_list: list[DataProcessor] = []
 
     def register_processor(self, proc: DataProcessor) -> None:
         self.processors_list.append(proc)
@@ -145,27 +147,34 @@ class DataStream():
                   f"remaining {remains} on processor")
 
     def output_pipeline(self, nb: int, plugin: ExportPlugin) -> None:
-        print(f"Send {nb} processed data from each processor to a {plugin.plugin_type}")
+        print(f"Send {nb} processed data from each processor "
+              f"to a {plugin.plugin_type} plugin:")
         for processor in self.processors_list:
+            data: list[tuple[int, str]] = []
             for _ in range(nb):
-                data: list[tuple[int, str]] = []
                 try:
                     now_rank, element = processor.output()
                     data.append((now_rank, element))
-                except Exception as e:
-                    print(e)
+                except Exception:
                     break
             plugin.process_output(data)
 
 
-data_list: list[Any] = ['Hello world',
-             [3.14, -1, 2.71],
-             [{'log_level': 'WARNING',
-               'log_message': 'Telnet access! Use ssh instead'},
-              {'log_level': 'INFO',
-               'log_message': 'User wil is connected'}],
-             42,
-             ['Hi', 'five']]
+def output_datastream_statics(dataStream: DataStream) -> None:
+    print("\n== DataStream statistics ==")
+    dataStream.print_processors_stats()
+    print()
+
+
+data_list: list[Any] = [
+        'Hello world',
+        [3.14, -1, 2.71],
+        [{'log_level': 'WARNING',
+          'log_message': 'Telnet access! Use ssh instead'},
+         {'log_level': 'INFO',
+          'log_message': 'User wil is connected'}],
+        42,
+        ['Hi', 'five']]
 another_data_list: list[Any] = [
         21,
         ['I love AI', 'LLMs are wonderful', 'Stay healthy'],
@@ -173,9 +182,9 @@ another_data_list: list[Any] = [
           'log_message': '500 server crash'},
          {'log_level': 'NOTICE',
           'log_message': 'Certificate expires in 10 days'}],
-         [32, 42, 64, 84, 128, 168],
-         'World hello'
-         ]
+        [32, 42, 64, 84, 128, 168],
+        'World hello'
+        ]
 
 if __name__ == '__main__':
     numProcessor = NumericProcessor()
@@ -189,24 +198,26 @@ if __name__ == '__main__':
 
     print("Initialize Data Stream...")
 
-    print("\n== DataStream statics ==\n")
+    print("\n== DataStream statics ==")
     dataStream.process_stream([])
 
-    print("\nRegistering Numeric Processor")
+    print("\nRegistering Processors\n")
     dataStream.register_processor(numProcessor)
     dataStream.register_processor(textProcessor)
     dataStream.register_processor(logProcessor)
 
-    print(f"Send first batch of data on strem: {data_list}\n")
+    print(f"Send first batch of data on strem: {data_list}")
     dataStream.process_stream(data_list)
+
+    output_datastream_statics(dataStream)
+
     dataStream.output_pipeline(3, csvPlugin)
 
-    print("\n== DataStrem statistics ==")
-    dataStream.print_processors_stats()
+    output_datastream_statics(dataStream)
 
-    print(f"Send another batch of data: {another_data_list}")
+    print(f"Send another batch of data: {another_data_list}\n")
     dataStream.process_stream(another_data_list)
+
     dataStream.output_pipeline(5, jsonPlugin)
 
-    print("\n== DataStrem statistics ==")
-    dataStream.print_processors_stats()
+    output_datastream_statics(dataStream)

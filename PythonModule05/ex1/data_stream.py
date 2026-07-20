@@ -86,7 +86,7 @@ class LogProcessor(DataProcessor):
 
 class DataStream():
     def __init__(self) -> None:
-        self.processors_list: list[DataProcessor]= []
+        self.processors_list: list[DataProcessor] = []
 
     def register_processor(self, proc: DataProcessor) -> None:
         self.processors_list.append(proc)
@@ -118,14 +118,14 @@ class DataStream():
 
 
 empty_data_list: list[str] = []
-data_list: list[Any] = ['Hello world',
-             [3.14, -1, 2.71],
-             [{'log_level': 'WARNING',
-               'log_message': 'Telnet access! Use ssh instead'},
-              {'log_level': 'INFO',
-               'log_message': 'User wil is connected'}],
-             42,
-             ['Hi', 'five']]
+data_list: list[Any] = [
+        'Hello world',
+        [3.14, -1, 2.71],
+        [{'log_level': 'WARNING',
+          'log_message': 'Telnet access! Use ssh instead'},
+         {'log_level': 'INFO', 'log_message': 'User wil is connected'}],
+        42,
+        ['Hi', 'five']]
 
 
 if __name__ == '__main__':
