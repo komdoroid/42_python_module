@@ -15,7 +15,7 @@ class DataProcessor(ABC):
         pass
 
     @abstractmethod
-    def inget(self, data: Any) -> None:
+    def ingest(self, data: Any) -> None:
         pass
 
     def output(self) -> tuple[int, str]:
@@ -33,7 +33,7 @@ class NumericProcessor(DataProcessor):
             return all(isinstance(item, (int, float)) for item in data)
         return False
 
-    def inget(self, data: int | float | list[int | float]) -> None:
+    def ingest(self, data: int | float | list[int | float]) -> None:
         if not self.validate(data):
             print(f"'{data}' without prior validation:")
             print(' Got exception: Improper numeric data')
@@ -53,7 +53,7 @@ class TextProcessor(DataProcessor):
             return all(isinstance(item, str) for item in data)
         return False
 
-    def inget(self, data: str | list[str]) -> None:
+    def ingest(self, data: str | list[str]) -> None:
         if not self.validate(data):
             print(f"'{data}' without prior validation:")
             print('Got exception: Improper text data')
@@ -73,7 +73,7 @@ class LogProcessor(DataProcessor):
             return all(isinstance(item, dict) for item in data)
         return False
 
-    def inget(self, data: dict[str, str] | list[dict[str, str]]) -> None:
+    def ingest(self, data: dict[str, str] | list[dict[str, str]]) -> None:
         if not self.validate(data):
             print(f"'{data}' without prior validation:")
             print('Got exception: Improper log data')
@@ -131,7 +131,7 @@ class DataStream():
         for data in stream:
             for processor in self.processors_list:
                 if processor.validate(data):
-                    processor.inget(data)
+                    processor.ingest(data)
                     break
 
     def print_processors_stats(self) -> None:

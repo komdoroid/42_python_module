@@ -14,7 +14,7 @@ class DataProcessor(ABC):
         pass
 
     @abstractmethod
-    def inget(self, data: Any) -> None:
+    def ingest(self, data: Any) -> None:
         pass
 
     def output(self) -> tuple[int, str]:
@@ -31,7 +31,7 @@ class NumericProcessor(DataProcessor):
             return all(isinstance(item, (int, float)) for item in data)
         return False
 
-    def inget(self, data: int | float | list[int | float]) -> None:
+    def ingest(self, data: int | float | list[int | float]) -> None:
         if not self.validate(data):
             print(f"'{data}' without prior validation:")
             print(' Got exception: Improper numeric data')
@@ -51,7 +51,7 @@ class TextProcessor(DataProcessor):
             return all(isinstance(item, str) for item in data)
         return False
 
-    def inget(self, data: str | list[str]) -> None:
+    def ingest(self, data: str | list[str]) -> None:
         if not self.validate(data):
             print(f"'{data}' without prior validation:")
             print('Got exception: Improper text data')
@@ -71,7 +71,7 @@ class LogProcessor(DataProcessor):
             return all(isinstance(item, dict) for item in data)
         return False
 
-    def inget(self, data: dict[str, str] | list[dict[str, str]]) -> None:
+    def ingest(self, data: dict[str, str] | list[dict[str, str]]) -> None:
         if not self.validate(data):
             print(f"'{data}' without prior validation:")
             print('Got exception: Improper log data')
@@ -101,12 +101,12 @@ def output_num_processor(numProcessor: NumericProcessor) -> None:
     print(f" Trying to validate input '{str_data}'"
           f": {numProcessor.validate(str_data)}")
     print(" Test invalid ingestion of string ", end='')
-    numProcessor.inget(foo_data)
+    numProcessor.ingest(foo_data)
     print(f" Processing data: {num_data_list}")
     loop_count = 3
     print(f" Extracting {loop_count} values...")
     if numProcessor.validate(num_data_list):
-        numProcessor.inget(num_data_list)
+        numProcessor.ingest(num_data_list)
     for i in range(loop_count):
         rank_counter, pop_data = numProcessor.output()
         print(f" Numeric value {rank_counter}: {pop_data}")
@@ -120,7 +120,7 @@ def output_text_processor(textProcessor: TextProcessor) -> None:
     loop_count = 1
     print(f" Extracting {loop_count} values...")
     if textProcessor.validate(str_data_list):
-        textProcessor.inget(str_data_list)
+        textProcessor.ingest(str_data_list)
     for i in range(loop_count):
         rank_counter, pop_data = textProcessor.output()
         print(f" Text value {rank_counter}: {pop_data}")
@@ -134,10 +134,10 @@ def output_log_processor(logProcessor: LogProcessor) -> None:
     loop_count = 2
     print(f" Extracting {loop_count} values...")
     if logProcessor.validate(dict_data_list):
-        logProcessor.inget(dict_data_list)
+        logProcessor.ingest(dict_data_list)
     for i in range(loop_count):
         rank_counter, pop_data = logProcessor.output()
-        print(f" Log {rank_counter}: {pop_data}")
+        print(f" Log entry {rank_counter}: {pop_data}")
 
 
 if __name__ == '__main__':
