@@ -6,7 +6,7 @@ from abc import ABC, abstractmethod
 
 class DataProcessor(ABC):
     def __init__(self) -> None:
-        self.data_list = []
+        self.data_list: list[str] = []
         self.rank_counter = 0
 
     @abstractmethod
@@ -14,7 +14,7 @@ class DataProcessor(ABC):
         pass
 
     @abstractmethod
-    def inget(self, ) -> None:
+    def inget(self, data: Any) -> None:
         pass
 
     def output(self) -> tuple[int, str]:
@@ -84,12 +84,12 @@ class LogProcessor(DataProcessor):
             self.data_list.append(str(data.values()))
 
 
-num_data = 42
-str_data = 'Hello'
-foo_data = 'foo'
-num_data_list = [1, 2, 3, 4, 5]
-str_data_list = ['Hello', 'Nexus', 'World']
-dict_data_list = [{'log_level': 'NOTICE',
+num_data: int = 42
+str_data: str = 'Hello'
+foo_data: str = 'foo'
+num_data_list: list[int | float] = [1, 2, 3, 4, 5]
+str_data_list: list[str] = ['Hello', 'Nexus', 'World']
+dict_data_list: list[dict] = [{'log_level': 'NOTICE',
                    'log_message': 'Connection to server'},
                   {'log_level': 'ERROR',
                    'log_message': 'Unauthorized access!!'}]

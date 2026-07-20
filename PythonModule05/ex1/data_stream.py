@@ -14,7 +14,7 @@ class DataProcessor(ABC):
         pass
 
     @abstractmethod
-    def inget(self, ) -> None:
+    def inget(self, data: Any) -> None:
         pass
 
     def output(self) -> tuple[int, str]:
@@ -86,12 +86,12 @@ class LogProcessor(DataProcessor):
 
 class DataStream():
     def __init__(self) -> None:
-        self.processors_list = []
+        self.processors_list: list[DataProcessor]= []
 
     def register_processor(self, proc: DataProcessor) -> None:
         self.processors_list.append(proc)
 
-    def process_stream(self, stream: list[typing.Any]) -> None:
+    def process_stream(self, stream: list[Any]) -> None:
         if not stream:
             pass
         if not self.processors_list:
@@ -117,8 +117,8 @@ class DataStream():
                   f"remaining {remains} on processor")
 
 
-empty_data_list = []
-data_list = ['Hello world',
+empty_data_list: list[str] = []
+data_list: list[Any] = ['Hello world',
              [3.14, -1, 2.71],
              [{'log_level': 'WARNING',
                'log_message': 'Telnet access! Use ssh instead'},
