@@ -73,7 +73,7 @@ class LogProcessor(DataProcessor):
             return all(isinstance(item, dict) for item in data)
         return False
 
-    def inget(self, data: dict | list[dict]) -> None:
+    def inget(self, data: dict[str, str] | list[dict[str, str]]) -> None:
         if not self.validate(data):
             print(f"'{data}' without prior validation:")
             print('Got exception: Improper log data')
@@ -83,6 +83,7 @@ class LogProcessor(DataProcessor):
                 result = ': '.join(item.values())
                 self.data_list.append(result)
         else:
+            result = ': '.join(str(v) for v in data.values())
             self.data_list.append(str(data.values()))
 
 
@@ -132,8 +133,6 @@ class DataStream():
                 if processor.validate(data):
                     processor.inget(data)
                     break
-                # print(f"{self.__class__.__name__} error - "
-                #       f"Can't process element in strem: {data}")
 
     def print_processors_stats(self) -> None:
         for processor in self.processors_list:
@@ -144,7 +143,7 @@ class DataStream():
                 print("Text Processor: ", end='')
             if processor.__class__.__name__ == "LogProcessor":
                 print("Log Processor: ", end='')
-            print(f"total items {remains + processor.rank_counter}, "
+            print(f"total {remains + processor.rank_counter} items processed, "
                   f"remaining {remains} on processor")
 
     def output_pipeline(self, nb: int, plugin: ExportPlugin) -> None:
@@ -156,7 +155,7 @@ class DataStream():
                 try:
                     now_rank, element = processor.output()
                     data.append((now_rank, element))
-                except Exception:
+                except IndexError:
                     break
             plugin.process_output(data)
 
@@ -207,7 +206,7 @@ if __name__ == '__main__':
     dataStream.register_processor(textProcessor)
     dataStream.register_processor(logProcessor)
 
-    print(f"Send first batch of data on strem: {data_list}")
+    print(f"Send first batch of data on stream: {data_list}")
     dataStream.process_stream(data_list)
 
     output_datastream_statics(dataStream)

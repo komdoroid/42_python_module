@@ -24,7 +24,7 @@ class DataProcessor(ABC):
 
 
 class NumericProcessor(DataProcessor):
-    def validate(self, data) -> bool:
+    def validate(self, data: Any) -> bool:
         if isinstance(data, (int, float)):
             return True
         if isinstance(data, list):
@@ -71,7 +71,7 @@ class LogProcessor(DataProcessor):
             return all(isinstance(item, dict) for item in data)
         return False
 
-    def inget(self, data: dict | list[dict]) -> None:
+    def inget(self, data: dict[str, str] | list[dict[str, str]]) -> None:
         if not self.validate(data):
             print(f"'{data}' without prior validation:")
             print('Got exception: Improper log data')
@@ -81,6 +81,7 @@ class LogProcessor(DataProcessor):
                 result = ': '.join(item.values())
                 self.data_list.append(result)
         else:
+            result = ': '.join(str(v) for v in data.values())
             self.data_list.append(str(data.values()))
 
 
@@ -89,7 +90,7 @@ str_data: str = 'Hello'
 foo_data: str = 'foo'
 num_data_list: list[int | float] = [1, 2, 3, 4, 5]
 str_data_list: list[str] = ['Hello', 'Nexus', 'World']
-dict_data_list: list[dict] = [
+dict_data_list: list[dict[str, str]] = [
         {'log_level': 'NOTICE', 'log_message': 'Connection to server'},
         {'log_level': 'ERROR', 'log_message': 'Unauthorized access!!'}]
 
