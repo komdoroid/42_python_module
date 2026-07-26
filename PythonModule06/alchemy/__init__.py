@@ -1,3 +1,4 @@
 from .elements import create_air
+from .potions import healing_potion as heal
 
-__all__: list[str] = ['create_air']
+__all__: list[str] = ['create_air', 'strength_potion', 'heal']
