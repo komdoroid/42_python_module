@@ -1,4 +1,9 @@
-from alchemy import elements
+#!/usr/bin/env python3
 
-create_air()
-# print(create_air())
+from alchemy import create_air
+
+
+if __name__ == '__main__':
+    print('=== Alembic 5 ===')
+    print("Accessing the alchemy module using 'from alchemy import ...'")
+    print(f"Testing create_air: {create_air()}")
