@@ -1,10 +1,12 @@
-#!/usr/bin/env python3
+from elements import create_fire, create_water
+from alchemy.elements import create_earth, create_air
+
 
 def healing_potion() -> str:
-    return ("Healing potion brewed with "
-            "'[created earth element]' and '[created air element]'")
+    return (f"Healing potion brewed with "
+            f"'{create_earth()}' and '{create_air()}'")
 
 
 def strength_potion() -> str:
-    return ("Strength potion brewed with "
-            "'[created fire element]' and '[created water element]'")
+    return (f"Strength potion brewed with "
+            f"'{create_fire()}' and '{create_water()}'")
