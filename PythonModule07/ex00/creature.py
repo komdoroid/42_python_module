@@ -11,12 +11,13 @@ class Creature(ABC):
     def attack() -> None:
         pass
 
-    def describe() -> None:
-        pass
+    def describe(self) -> None:
+        print(f'{self.name} is a {self.type} type Creature')
 
 
 class Flameling(Creature):
     def __init__(self) -> None:
+        self.name = 'Flameling'
         self.type = 'Fire'
 
     def attack(self) -> None:
@@ -25,6 +26,7 @@ class Flameling(Creature):
 
 class Pyrodon(Creature):
     def __init__(self) -> None:
+        self.name = 'Pyrodon'
         self.type = 'Fire/Flying'
 
     def attack(self) -> None:
@@ -33,6 +35,7 @@ class Pyrodon(Creature):
 
 class Aquabub(Creature):
     def __init__(self) -> None:
+        self.name = 'Aquabub'
         self.type = 'Water'
 
     def attack(self) -> None:
@@ -41,6 +44,7 @@ class Aquabub(Creature):
 
 class Torragon(Creature):
     def __init__(self) -> None:
+        self.name = 'Torragon'
         self.type = 'Water'
 
     def attack(self) -> None:
