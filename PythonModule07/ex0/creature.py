@@ -4,11 +4,11 @@ from abc import ABC, abstractmethod
 
 
 class Creature(ABC):
-    def __init__(self) -> None:
-        pass
+    name: str
+    type: str
 
     @abstractmethod
-    def attack() -> None:
+    def attack(self) -> None:
         pass
 
     def describe(self) -> None:

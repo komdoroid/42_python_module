@@ -1,4 +1,14 @@
-from ex2 import CreatureFactory, FlameFactory, AquaFactory, HealingCreatureFactory, TransformCreatureFactory, BattleStrategy, NormalStrategy, AgressiveStrategy, DefensiveStrategy, InvalidStrategyError
+from ex2 import (
+        CreatureFactory,
+        FlameFactory,
+        AquaFactory,
+        HealingCreatureFactory,
+        TransformCreatureFactory,
+        BattleStrategy,
+        NormalStrategy,
+        AggressiveStrategy,
+        DefensiveStrategy,
+        InvalidStrategyError)
 
 
 def battle(opponents: list[tuple[CreatureFactory, BattleStrategy]]) -> None:
@@ -25,7 +35,6 @@ def battle(opponents: list[tuple[CreatureFactory, BattleStrategy]]) -> None:
                 print(f'Battle error, aborting tournament: {e}\n')
 
 
-
 if __name__ == '__main__':
     ff = FlameFactory()
     af = AquaFactory()
@@ -33,7 +42,7 @@ if __name__ == '__main__':
     tcf = TransformCreatureFactory()
 
     ns = NormalStrategy()
-    agrs = AgressiveStrategy()
+    agrs = AggressiveStrategy()
     defs = DefensiveStrategy()
 
     print('Tournament 0 (basic)')

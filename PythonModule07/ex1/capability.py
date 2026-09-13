@@ -11,8 +11,9 @@ class HealCapability(ABC):
 
 class TransformCapability(ABC):
     @abstractmethod
-    def transform() -> None:
+    def transform(self) -> None:
         pass
 
-    def revert() -> None:
+    @abstractmethod
+    def revert(self) -> None:
         pass

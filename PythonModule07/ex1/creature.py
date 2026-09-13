@@ -1,19 +1,20 @@
 #!/usr/bin/env python3
 
 from abc import ABC, abstractmethod
-from .capability  import HealCapability, TransformCapability
+from .capability import HealCapability, TransformCapability
 
 
 class Creature(ABC):
-    def __init__(self) -> None:
-        pass
+    name: str
+    type: str
 
     @abstractmethod
-    def attack() -> None:
+    def attack(self) -> None:
         pass
 
     def describe(self) -> None:
         print(f'{self.name} is a {self.type} type Creature')
+
 
 class Flameling(Creature):
     def __init__(self) -> None:
@@ -95,6 +96,7 @@ class Shiftling(Creature, TransformCapability):
         self.is_transformed = False
         print(f'{self.name} returns to normal.')
 
+
 class Morphagon(Creature, TransformCapability):
     def __init__(self) -> None:
         self.name = 'Morphagon'
@@ -114,9 +116,3 @@ class Morphagon(Creature, TransformCapability):
     def revert(self) -> None:
         self.is_transformed = False
         print(f'{self.name} stabilizes its form.')
-
-
-if __name__ == '__main__':
-    c = Flameling()
-    c.attack()
-    print(c.type)
