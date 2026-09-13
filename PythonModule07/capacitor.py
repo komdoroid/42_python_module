@@ -1,4 +1,4 @@
-from ex1 import CreatureFactory, HealingCreatureFactory, TransformCreatureFactory
+from ex1 import HealingCreatureFactory, TransformCreatureFactory
 
 if __name__ == '__main__':
     print('Testing Creature with healing capability')

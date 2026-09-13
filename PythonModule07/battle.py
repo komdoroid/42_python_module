@@ -1,9 +1,9 @@
-from ex0 import CreatureFactory, FlameFactory, AquaFactory
+from ex0 import FlameFactory, AquaFactory
 
 
 if __name__ == '__main__':
     for factory in (FlameFactory(), AquaFactory()):
-        print('Testing Factory')
+        print('Testing factory')
         c = factory
         base = c.create_base()
         base.describe()
@@ -19,9 +19,9 @@ if __name__ == '__main__':
     aqua = AquaFactory()
     flame_base = flame.create_base()
     aqua_base = aqua.create_base()
-    
+
     flame_base.describe()
-    print(' vs')
+    print(' vs.')
     aqua_base.describe()
     print(' fight!')
     flame_base.attack()
