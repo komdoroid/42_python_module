@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#bin!/usr/bin/env python3
 
 import importlib.util
 
@@ -90,8 +90,8 @@ if __name__ == '__main__':
         print("Then run this program again.")
     else:
         print("\nAnalyzing Matrix data...")
-        analyze_data()
-        print("Processing data points...")
+        data_num = analyze_data()
+        print(f"Processing {data_num} data points...")
         print("Generating visualization...")
 
         print("Analysis complete!")
