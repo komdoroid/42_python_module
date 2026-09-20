@@ -19,14 +19,14 @@ if __name__ == '__main__':
         print("To enter the construct, run:")
         print("python -m venv matrix_env")
         print("source matrix_env/bin/activate # On Unix")
-        print("matrix_env\Scripts\activate # On Windows\n")
+        print("matrix_env\\Scripts\\activate # On Windows\n")
 
         print("Then run this program again.")
 
     else:
         # Inside the Construct
         print("MATRIX STATUS: Welcome to the construct\n")
-        
+
         print(f"Current Python: {sys.executable}")
         print(f"Virtual Environment: {os.path.basename(sys.prefix)}")
         print(f"Environment Path: {sys.prefix}\n")
