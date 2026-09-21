@@ -1,3 +1,4 @@
+# バージョンを記載するべき
 pandas
 numpy
 requests

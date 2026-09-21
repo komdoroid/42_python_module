@@ -18,7 +18,6 @@ if __name__ == "__main__":
     after_load_env = {}
     for secret in SECRETS_LIST:
         before_load_env[secret] = os.getenv(secret)
-    # Load env file
     load_dotenv()
     for secret in SECRETS_LIST:
         after_load_env[secret] = os.getenv(secret)
