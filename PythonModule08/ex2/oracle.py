@@ -24,8 +24,14 @@ if __name__ == "__main__":
 
     print("Configuration loaded:")
     print(f"Mode: {os.getenv('MATRIX_MODE')}")
-    print(f"Database: {os.getenv('DATABASE_URL')}")
-    print(f"API Access: {os.getenv('API_KEY')}")
+    if os.getenv('DATABASE_URL'):
+        print("Database: Connected to local instance")
+    else:
+        print(f"Database: {os.getenv('DATABASE_URL')}")
+    if os.getenv('API_KEY'):
+        print("API Access: Authenticated")
+    else:
+        print(f"API Access: {os.getenv('API_KEY')}")
     print(f"Log Level: {os.getenv('LOG_LEVEL')}")
     print(f"Zion Network: {os.getenv('ZION_ENDPOINT')}")
 
