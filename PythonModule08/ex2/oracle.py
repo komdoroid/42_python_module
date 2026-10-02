@@ -1,7 +1,14 @@
 #!/usr/bin/env python3
 
-from dotenv import load_dotenv
 import os
+import sys
+
+try:
+    from dotenv import load_dotenv
+except ImportError:
+    print("[ERROR] 'python-dotenv' is not installed.")
+    print("        Install it with: pip install python-dotenv")
+    sys.exit(1)
 
 SECRETS_LIST = [
         "MATRIX_MODE",
