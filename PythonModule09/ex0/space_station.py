@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, ValidationError
 from datetime import datetime
 
 
@@ -33,4 +33,21 @@ if __name__ == '__main__':
     print(f"Crew: {valid_station.crew_size} 6 people")
     print(f"Power: {valid_station.power_level}%")
     print(f"Oxygen: {valid_station.oxygen_level}%")
-    print(f"Status: {valid_station.is_operational}")
+    print(f"Status: {valid_station.is_operational}\n")
+
+    print("========================================")
+    print("Expected validation error:")
+    try:
+        valid_station = SpaceStation(
+                station_id = "ISS001",
+                name = "International Space Station",
+                crew_size = 21,
+                power_level = 82.5,
+                oxygen_level = 92.3,
+                last_maintenance = datetime(
+                    2026, 9, 30, 0, 42
+                    ),
+                )
+    except ValidationError as e:
+        print(e.errors()[0]['msg'])
+
