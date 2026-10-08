@@ -14,16 +14,17 @@ class SpaceStation(BaseModel):
     is_operational: bool | None = True
     notes: str | None = Field(default=None, max_length=200)
 
+
 if __name__ == '__main__':
     print("Space Station Data Validation")
     print("========================================")
     valid_station = SpaceStation(
-            station_id = "ISS001",
-            name = "International Space Station",
-            crew_size = 6,
-            power_level = 82.5,
-            oxygen_level = 92.3,
-            last_maintenance = datetime(
+            station_id="ISS001",
+            name="International Space Station",
+            crew_size=6,
+            power_level=82.5,
+            oxygen_level=92.3,
+            last_maintenance=datetime(
                 2026, 9, 30, 0, 42
                 ),
             )
@@ -39,15 +40,14 @@ if __name__ == '__main__':
     print("Expected validation error:")
     try:
         valid_station = SpaceStation(
-                station_id = "ISS001",
-                name = "International Space Station",
-                crew_size = 21,
-                power_level = 82.5,
-                oxygen_level = 92.3,
-                last_maintenance = datetime(
+                station_id="ISS001",
+                name="International Space Station",
+                crew_size=21,
+                power_level=82.5,
+                oxygen_level=92.3,
+                last_maintenance=datetime(
                     2026, 9, 30, 0, 42
                     ),
                 )
     except ValidationError as e:
         print(e.errors()[0]['msg'])
-
