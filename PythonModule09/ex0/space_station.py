@@ -31,10 +31,13 @@ if __name__ == '__main__':
     print("Valid station created:")
     print(f"ID: {valid_station.station_id}")
     print(f"Name: {valid_station.name}")
-    print(f"Crew: {valid_station.crew_size} 6 people")
+    print(f"Crew: {valid_station.crew_size} people")
     print(f"Power: {valid_station.power_level}%")
     print(f"Oxygen: {valid_station.oxygen_level}%")
-    print(f"Status: {valid_station.is_operational}\n")
+    if valid_station.is_operational:
+        print("Status: Operational\n")
+    else:
+        print("Status: Non-operational")
 
     print("========================================")
     print("Expected validation error:")

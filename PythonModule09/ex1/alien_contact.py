@@ -4,6 +4,7 @@ from pydantic import BaseModel, Field, ValidationError, model_validator
 from datetime import datetime
 from enum import Enum
 
+
 class ContactType(Enum):
     RADIO = "radio"
     VISUAL = "visual"
@@ -27,7 +28,7 @@ class AlienContact(BaseModel):
         if self.contact_id[:2] != "AC":
             raise ValueError("Contact ID must start with 'AC'(Alien Contact)")
         if self.contact_type == ContactType.PHYSICAL and not self.is_verified:
-            raise ValueError("Physical contact reports must be vrified")
+            raise ValueError("Physical contact reports must be verified")
         if (self.contact_type == ContactType.TELEPATHIC
                 and self.witness_count < 3):
             raise ValueError(
@@ -67,7 +68,7 @@ if __name__ == '__main__':
         print(f"Message: '{valid_report.message_received}'")
     except ValidationError as e:
         print(e.errors()[0]['msg'])
-    print("========================================")
+    print("\n========================================")
     print("Expected validation error:")
     try:
         valid_report = AlienContact(
