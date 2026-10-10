@@ -50,7 +50,7 @@ if __name__ == '__main__':
                 timestamp=datetime(
                         2026, 9, 30, 0, 42
                         ),
-                location="Area 51, nevada",
+                location="Area 51, Nevada",
                 contact_type=ContactType.RADIO,
                 signal_strength=8.5,
                 duration_minutes=45,
@@ -67,7 +67,7 @@ if __name__ == '__main__':
         print(f"Witnesses: {valid_report.witness_count}")
         print(f"Message: '{valid_report.message_received}'")
     except ValidationError as e:
-        print(e.errors()[0]['msg'])
+        print(e.errors()[0]['ctx']['error'])
     print("\n========================================")
     print("Expected validation error:")
     try:
@@ -93,4 +93,4 @@ if __name__ == '__main__':
         print(f"Witnesses: {valid_report.witness_count}")
         print(f"Message: '{valid_report.message_received}'")
     except ValidationError as e:
-        print(e.errors()[0]['msg'])
+        print(e.errors()[0]['ctx']['error'])

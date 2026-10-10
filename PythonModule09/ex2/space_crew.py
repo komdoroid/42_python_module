@@ -54,7 +54,7 @@ class SpaceMission(BaseModel):
         return self
 
 
-if __name__ == '__main__':
+def main() -> None:
     valid_mission_data = {
         "mission_id": "M2024_MARS",
         "mission_name": "Mars Colony Establishment",
@@ -130,7 +130,7 @@ if __name__ == '__main__':
         for c in mission.crew:
             print(f"- {c.name} ({c.rank.value}) - {c.specialization}")
     except ValidationError as e:
-        print(e.errors()[0]['msg'])
+        print(e.errors()[0]['ctx']['error'])
 
     print("\n=========================================")
     print("Expected validation error:")
@@ -145,4 +145,8 @@ if __name__ == '__main__':
         for c in invalid_mission.crew:
             print(f"- {c.name} ({c.rank.value}) - {c.specialization}")
     except ValidationError as e:
-        print(e.errors()[0]['msg'])
+        print(e.errors()[0]['ctx']['error'])
+
+
+if __name__ == '__main__':
+    main()
