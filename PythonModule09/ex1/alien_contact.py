@@ -67,7 +67,7 @@ if __name__ == '__main__':
         print(f"Witnesses: {valid_report.witness_count}")
         print(f"Message: '{valid_report.message_received}'")
     except ValidationError as e:
-        print(e.errors()[0]['ctx']['error'])
+        print(e.errors()[0]['msg'])
     print("\n========================================")
     print("Expected validation error:")
     try:
@@ -93,4 +93,4 @@ if __name__ == '__main__':
         print(f"Witnesses: {valid_report.witness_count}")
         print(f"Message: '{valid_report.message_received}'")
     except ValidationError as e:
-        print(e.errors()[0]['ctx']['error'])
+        print(e.errors()[0]['msg'])
